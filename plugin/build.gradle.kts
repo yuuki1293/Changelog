@@ -11,6 +11,8 @@ plugins {
 
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     alias(libs.plugins.kotlin.jvm)
+
+    `maven-publish`
 }
 
 repositories {
@@ -29,7 +31,17 @@ gradlePlugin {
     // Define the plugin
     val greeting by plugins.creating {
         id = "org.example.greeting"
+        version = "1.0.0"
         implementationClass = "org.example.ChangelogManagerPlugin"
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "localPluginRepository"
+            url = uri("../build/repo")
+        }
     }
 }
 
