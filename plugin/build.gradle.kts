@@ -30,7 +30,7 @@ dependencies {
 gradlePlugin {
     // Define the plugin
     val greeting by plugins.creating {
-        id = "org.example.greeting"
+        id = "com.github.yuuki1293.ChangelogManager".lowercase()
         version = "1.0.0"
         implementationClass = "org.example.ChangelogManagerPlugin"
     }
