@@ -32,16 +32,13 @@ gradlePlugin {
     val greeting by plugins.creating {
         id = "com.github.yuuki1293.ChangelogManager".lowercase()
         version = "1.0.0"
-        implementationClass = "org.example.ChangelogManagerPlugin"
+        implementationClass = "yuuki1293.changelog.ChangelogManagerPlugin"
     }
 }
 
 publishing {
     repositories {
-        maven {
-            name = "localPluginRepository"
-            url = uri("../build/repo")
-        }
+        mavenCentral()
     }
 }
 

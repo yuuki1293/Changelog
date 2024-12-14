@@ -1,4 +1,4 @@
-package com.github.yuuki1293.changelog
+package yuuki1293.changelog
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.InputFile

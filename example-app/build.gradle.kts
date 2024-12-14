@@ -1,13 +1,12 @@
+import com.github.yuuki1293.changelog.ChangelogManagerPlugin
+
 plugins {
     kotlin("jvm") version "2.0.20"
 }
 
 buildscript {
     repositories {
-        maven {
-            name = "Local"
-            url = uri("../build/repo")
-        }
+        mavenLocal()
     }
     dependencies {
         classpath("ChangelogManager:plugin:1.0.0")
@@ -18,6 +17,7 @@ group = "org.example"
 version = "unspecified"
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -31,3 +31,5 @@ tasks.test {
 kotlin {
     jvmToolchain(21)
 }
+
+apply<ChangelogManagerPlugin>()
