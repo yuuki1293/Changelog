@@ -29,16 +29,10 @@ dependencies {
 
 gradlePlugin {
     // Define the plugin
-    val greeting by plugins.creating {
+    val changelog by plugins.creating {
         id = "com.github.yuuki1293.ChangelogManager".lowercase()
         version = "1.0.0"
-        implementationClass = "yuuki1293.changelog.ChangelogManagerPlugin"
-    }
-}
-
-publishing {
-    repositories {
-        mavenCentral()
+        implementationClass = "com.github.yuuki1293.changelog.ChangelogPlugin"
     }
 }
 

@@ -1,16 +1,6 @@
-import yuuki1293.changelog.ChangelogManagerPlugin
-
 plugins {
     kotlin("jvm") version "2.0.20"
-}
-
-buildscript {
-    repositories {
-        mavenLocal()
-    }
-    dependencies {
-        classpath("ChangelogManager:plugin:1.0.0")
-    }
+    id("com.github.yuuki1293.changelogmanager") version("1.0.0")
 }
 
 group = "org.example"
@@ -28,8 +18,11 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(21)
 }
 
-apply<ChangelogManagerPlugin>()
+changelog {
+    version = project.version.toString()
+}
