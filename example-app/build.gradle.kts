@@ -1,4 +1,4 @@
-import com.github.yuuki1293.changelog.ChangelogManagerPlugin
+import yuuki1293.changelog.ChangelogManagerPlugin
 
 plugins {
     kotlin("jvm") version "2.0.20"
