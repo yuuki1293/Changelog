@@ -30,3 +30,4 @@ changelog {
 println("Changelog version: ${changelog.version.get()}")
 println("Changelog file: ${changelog.file.get()}")
 println("Changelog text: ${changelog.text()}")
+println("Changelog latest: ${changelog.latest()}")
