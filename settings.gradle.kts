@@ -17,4 +17,6 @@ plugins {
 
 rootProject.name = "ChangelogManager"
 include("plugin")
-include("example-app")
+if(System.getenv("IGNORE_SAMPLE") != "1"){
+    include("example-app")
+}
