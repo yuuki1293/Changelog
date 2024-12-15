@@ -8,7 +8,6 @@ import org.gradle.api.Project
  */
 class ChangelogPlugin: Plugin<Project> {
     override fun apply(project: Project) {
-        val extension = project.extensions.create("changelog", ChangelogExtension::class.java)
-        ChangelogExtension.setDefault(project, extension)
+        project.extensions.create("changelog", ChangelogExtension::class.java)
     }
 }

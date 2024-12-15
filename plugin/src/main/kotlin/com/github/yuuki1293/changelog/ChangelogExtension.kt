@@ -1,19 +1,21 @@
 package com.github.yuuki1293.changelog
 
 import org.gradle.api.Project
+import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
-import java.io.File
 
-interface ChangelogExtension {
+open class ChangelogExtension(project: Project) {
     /**
      * This is the target version. "latest" or any other version. ex: "1.0.0". default: "latest"
      */
-    val version: Property<String>
+    @Suppress("unused")
+    val version: Property<String> = project.objects.property(String::class.java).convention(DEFAULT_VERSION)
 
     /**
      * This is the target file. default: File(project.rootDir, "CHANGELOG.md")
      */
-    val file: Property<File>
+    @Suppress("MemberVisibilityCanBePrivate")
+    val file: RegularFileProperty = project.objects.fileProperty().convention(project.rootProject.layout.projectDirectory.file(DEFAULT_FILE_NAME))
 
     companion object {
         /**
@@ -25,10 +27,10 @@ interface ChangelogExtension {
          * The default changelog file name.
          */
         private const val DEFAULT_FILE_NAME: String = "CHANGELOG.md"
-
-        fun setDefault(project: Project, extension: ChangelogExtension) {
-            extension.version.convention(DEFAULT_VERSION)
-            extension.file.convention(File(project.rootDir, DEFAULT_FILE_NAME))
-        }
     }
+
+    /**
+     * get all raw text.
+     */
+    fun text(): String = file.get().asFile.readText()
 }
