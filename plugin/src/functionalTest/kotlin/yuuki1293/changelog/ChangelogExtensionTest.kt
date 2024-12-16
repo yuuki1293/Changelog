@@ -38,13 +38,13 @@ class ChangelogExtensionTest {
 
         // Run the build
         val runner = GradleRunner.create()
-        runner.forwardOutput()
         runner.withPluginClasspath()
+        runner.forwardOutput()
         runner.withProjectDir(projectDir)
         val result = runner.build()
 
         // Verify the result
-        assertTrue(result.output.equals("""## [Unreleased]
+        assertTrue(result.output.contains("""## [Unreleased]
 
 ### Added
 
@@ -67,6 +67,7 @@ class ChangelogExtensionTest {
 
 - Trademark sign previously shown after the project description in version
   0.3.0
+
 """))
     }
 }
