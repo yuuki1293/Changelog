@@ -4,7 +4,6 @@ import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
-import org.gradle.internal.impldep.org.apache.sshd.common.Property.IntegerProperty
 import java.time.LocalDate
 
 /**
