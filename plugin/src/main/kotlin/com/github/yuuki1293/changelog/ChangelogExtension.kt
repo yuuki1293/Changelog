@@ -5,6 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.internal.impldep.org.apache.sshd.common.Property.IntegerProperty
+import java.time.LocalDate
 
 /**
  * Plugin extension
@@ -14,7 +15,7 @@ open class ChangelogExtension(project: Project) {
     /**
      * This is the target version. "latest" or any other version. ex: "1.0.0". default: "latest"
      */
-    val version: Property<String> = project.objects.property(String::class.java).convention(DEFAULT_VERSION)
+    val target: Property<String> = project.objects.property(String::class.java).convention(DEFAULT_VERSION)
 
     /**
      * This is the target file. default: File(project.rootDir, "CHANGELOG.md")
@@ -87,30 +88,30 @@ open class ChangelogExtension(project: Project) {
     /**
      * get all raw text.
      */
-    fun text(): String = file.get().asFile.readText()
+    val allText: String get() = file.get().asFile.readText()
 
     /**
      * get latest data
      */
-    fun latest(): Changelog.Data {
+    val latest: Changelog.Data get() {
         sync()
         return changelog.getData()[0]
     }
 
     /**
      * get data set by the `version` property.
+     *
+     * NOTE: If you want to get target data, you can get them directly. use `changelog.text` instead of `changelog.data.text`
      */
-    fun data(): Changelog.Data {
-        if(version.get() == "latest") return latest()
-
-        return specific(version.get())
+    val data: Changelog.Data get() {
+        return specific(target.get())
     }
 
     /**
      * get data.
      */
     fun specific(version: String): Changelog.Data {
-        if(version == "latest") return latest()
+        if(version == "latest") return latest
 
         sync()
         val target = changelog.getData().filter { it.version == version }
@@ -121,12 +122,19 @@ open class ChangelogExtension(project: Project) {
         }
     }
 
+    val index: Int get() = data.index
+    val version: String get() = data.version
+    val date: LocalDate? get() = data.date
+    val text: String get() = data.text
+    val header: String get() = data.header
+    val body: String get() = data.body
+
     /**
      * sync changelog instance.
      */
     private fun sync() {
-        if (text() != changelog.rawText) {
-            changelog = Changelog(text(), versionRegex.get(), versionIndex.get(), dateIndex.get(), pattern.get())
+        if (allText != changelog.rawText) {
+            changelog = Changelog(allText, versionRegex.get(), versionIndex.get(), dateIndex.get(), pattern.get())
         }
     }
 }
