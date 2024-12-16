@@ -12,6 +12,7 @@ import org.junit.jupiter.api.io.TempDir
 /**
  * A simple functional test for the 'org.example.greeting' plugin.
  */
+@Suppress("FunctionName")
 class ChangelogPluginFunctionalTest {
 
     @field:TempDir
@@ -20,12 +21,15 @@ class ChangelogPluginFunctionalTest {
     private val buildFile by lazy { projectDir.resolve("build.gradle") }
     private val settingsFile by lazy { projectDir.resolve("settings.gradle") }
 
-    @Test fun `can run task`() {
+    @Test fun `can configure minimum changelog`() {
         // Set up the test build
         settingsFile.writeText("")
         buildFile.writeText("""
             plugins {
-                id('org.example.greeting')
+                id('com.github.yuuki1293.changelog')
+            }
+            
+            changelog {
             }
         """.trimIndent())
 
@@ -33,11 +37,10 @@ class ChangelogPluginFunctionalTest {
         val runner = GradleRunner.create()
         runner.forwardOutput()
         runner.withPluginClasspath()
-        runner.withArguments("greeting")
         runner.withProjectDir(projectDir)
         val result = runner.build()
 
         // Verify the result
-        assertTrue(result.output.contains("Hello from plugin 'org.example.greeting'"))
+        assertTrue(result.output.contains("BUILD SUCCESSFUL"))
     }
 }
