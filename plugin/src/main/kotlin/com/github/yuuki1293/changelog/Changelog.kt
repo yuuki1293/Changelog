@@ -64,7 +64,7 @@ data class Changelog(
             val version = s.second
             val date = s.third
             val end = smelted.getOrNull(i + 1)?.first ?: (lines.count() - 1)
-            val text = lines.slice(start..end).joinToString(System.lineSeparator())
+            val text = lines.slice(start..<end).joinToString(System.lineSeparator())
             val header = lines[0]
             val body = text.drop(header.length)
             Data(start, version, date, text, header, body)
