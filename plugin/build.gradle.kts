@@ -31,7 +31,7 @@ dependencies {
 gradlePlugin {
     // Define the plugin
     val changelog by plugins.creating {
-        id = "com.github.yuuki1293.ChangelogManager".lowercase()
+        id = "com.github.yuuki1293.changelog"
         version = "1.0.0"
         implementationClass = "com.github.yuuki1293.changelog.ChangelogPlugin"
     }

@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version "2.0.20"
-    id("com.github.yuuki1293.changelogmanager") version("1.0.0")
+    id("com.github.yuuki1293.changelog") version("1.0.0")
 }
 
 group = "org.example"

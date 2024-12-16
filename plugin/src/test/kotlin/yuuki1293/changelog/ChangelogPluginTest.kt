@@ -10,11 +10,11 @@ import kotlin.test.assertNotNull
 /**
  * A simple unit test for the 'org.example.greeting' plugin.
  */
-class ChangelogManagerPluginTest {
+class ChangelogPluginTest {
     @Test fun `plugin registers task`() {
         // Create a test project and apply the plugin
         val project = ProjectBuilder.builder().build()
-        project.plugins.apply("com.github.yuuki1293.ChangelogManager".lowercase())
+        project.plugins.apply("com.github.yuuki1293.changelog")
 
         // Verify the result
         assertNotNull(project.extensions.findByName("changelog"))
