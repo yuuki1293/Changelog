@@ -23,12 +23,12 @@ kotlin {
 }
 
 changelog {
-    file = file("${project.rootDir}/SAMPLE_CHANGELOG.md")
+    file = file("${project.rootDir}/SAMPLE_CHANGELOG.md") // The changelog file.
+    version = "1.1.1" // target version
 }
 
 tasks.register("sample_task") {
     println("Changelog version: ${changelog.version.get()}")
-    println("Changelog file: ${changelog.file.get()}")
-    println("Changelog text: ${changelog.text()}")
-    println("Changelog latest: ${changelog.latest()}")
+    println("Changelog latest:\n${changelog.latest()}")
+    println("Changelog target:\n${changelog.data()}")
 }

@@ -1,5 +1,6 @@
 package com.github.yuuki1293.changelog
 
+import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
@@ -45,6 +46,21 @@ open class ChangelogExtension(project: Project) {
     fun latest(): Changelog.Data {
         sync()
         return changelog.getData()[0]
+    }
+
+    /**
+     * get data set by the `version` property.
+     */
+    fun data(): Changelog.Data {
+        if(version.get() == "latest") return latest()
+
+        sync()
+        val specifics = changelog.getData().filter { it.version == version.get() }
+        when(specifics.size) {
+            0 -> throw GradleException("${version.get()} version notfound")
+            1 -> return specifics[0]
+            else -> throw GradleException("There is multiple ${version.get()} version available")
+        }
     }
 
     /**
