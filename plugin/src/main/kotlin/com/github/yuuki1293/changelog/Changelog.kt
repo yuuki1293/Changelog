@@ -18,12 +18,12 @@ data class Changelog(
         /**
          * The default versionIndex
          */
-        const val DEFAULT_VERSION_INDEX = 0
+        const val DEFAULT_VERSION_INDEX = 1
 
         /**
          * The default date index
          */
-        const val DEFAULT_DATE_INDEX = 2
+        const val DEFAULT_DATE_INDEX = 3
 
         /**
          * Empty instance.
