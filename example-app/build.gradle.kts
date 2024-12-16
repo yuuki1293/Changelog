@@ -23,7 +23,7 @@ kotlin {
 }
 
 changelog {
-    file = file("${project.rootDir}/SAMPLE_CHANGELOG.md") // The changelog file.
+    file = file("${project.rootDir}/../SAMPLE_CHANGELOG.md") // The changelog file.
     version = "1.1.1" // target version
 }
 
