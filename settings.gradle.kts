@@ -7,5 +7,5 @@ include("plugin")
 
 // ignore example-app while publishToMavenLocal
 if(System.getenv("IGNORE_SAMPLE") != "1"){
-    include("example-app")
+    includeBuild("example-app")
 }

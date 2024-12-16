@@ -7,7 +7,6 @@ group = "org.example"
 version = "unspecified"
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
@@ -24,10 +23,12 @@ kotlin {
 }
 
 changelog {
-    version = project.version.toString()
+    file = file("${project.rootDir}/SAMPLE_CHANGELOG.md")
 }
 
-println("Changelog version: ${changelog.version.get()}")
-println("Changelog file: ${changelog.file.get()}")
-println("Changelog text: ${changelog.text()}")
-println("Changelog latest: ${changelog.latest()}")
+tasks.register("sample_task") {
+    println("Changelog version: ${changelog.version.get()}")
+    println("Changelog file: ${changelog.file.get()}")
+    println("Changelog text: ${changelog.text()}")
+    println("Changelog latest: ${changelog.latest()}")
+}
