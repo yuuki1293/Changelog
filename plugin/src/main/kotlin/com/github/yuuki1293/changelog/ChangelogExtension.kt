@@ -103,12 +103,21 @@ open class ChangelogExtension(project: Project) {
     fun data(): Changelog.Data {
         if(version.get() == "latest") return latest()
 
+        return specific(version.get())
+    }
+
+    /**
+     * get data.
+     */
+    fun specific(version: String): Changelog.Data {
+        if(version == "latest") return latest()
+
         sync()
-        val target = changelog.getData().filter { it.version == version.get() }
+        val target = changelog.getData().filter { it.version == version }
         when(target.size) {
-            0 -> throw GradleException("${version.get()} version notfound")
+            0 -> throw GradleException("$version version notfound")
             1 -> return target[0]
-            else -> throw GradleException("There is multiple ${version.get()} version available")
+            else -> throw GradleException("There is multiple $version version available")
         }
     }
 
