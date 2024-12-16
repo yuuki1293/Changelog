@@ -14,7 +14,7 @@ class ChangelogPluginTest {
     @Test fun `plugin registers task`() {
         // Create a test project and apply the plugin
         val project = ProjectBuilder.builder().build()
-        project.plugins.apply("com.github.yuuki1293.changelog")
+        project.plugins.apply("io.github.yuuki1293.changelog")
 
         // Verify the result
         assertNotNull(project.extensions.findByName("changelog"))

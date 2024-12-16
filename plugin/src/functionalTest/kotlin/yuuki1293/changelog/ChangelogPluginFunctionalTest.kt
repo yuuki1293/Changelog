@@ -26,7 +26,7 @@ class ChangelogPluginFunctionalTest {
         settingsFile.writeText("")
         buildFile.writeText("""
             plugins {
-                id('com.github.yuuki1293.changelog')
+                id('io.github.yuuki1293.changelog')
             }
             
             changelog {

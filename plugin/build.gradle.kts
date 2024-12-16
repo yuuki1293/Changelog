@@ -13,6 +13,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
 
     `maven-publish`
+    id("com.gradle.plugin-publish") version "1.2.1"
 }
 
 repositories {
@@ -28,11 +29,18 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+group = "io.github.yuuki1293"
+version = "1.0.0"
+
 gradlePlugin {
+    website = "https://github.com/yuuki1293/Changelog"
+    vcsUrl = "https://github.com/yuuki1293/Changelog"
     // Define the plugin
     val changelog by plugins.creating {
-        id = "com.github.yuuki1293.changelog"
-        version = "1.0.0"
+        id = "io.github.yuuki1293.changelog"
+        displayName = "Changelog"
+        description = "gradle plugin for processing changelog"
+        tags = listOf("changelog")
         implementationClass = "com.github.yuuki1293.changelog.ChangelogPlugin"
     }
 }

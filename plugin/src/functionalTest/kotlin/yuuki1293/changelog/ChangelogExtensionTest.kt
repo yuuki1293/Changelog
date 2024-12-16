@@ -19,11 +19,11 @@ class ChangelogExtensionTest {
         settingsFile.writeText("")
         buildFile.writeText("""
             plugins {
-                id('com.github.yuuki1293.changelog')
+                id('io.github.yuuki1293.changelog')
             }
             
             changelog {
-                version = "1.1.1"
+                target = "1.1.1"
             }
         """.trimIndent())
         testFile.writeText(this::class.java.getResource("/SAMPLE_CHANGELOG.md")?.readText() ?: "")
@@ -33,7 +33,7 @@ class ChangelogExtensionTest {
         // Set up the test build
         writeBasic()
         buildFile.appendText("""
-            println(changelog.latest())
+            println(changelog.latest)
         """.trimIndent())
 
         // Run the build
@@ -75,7 +75,7 @@ class ChangelogExtensionTest {
         // Set up the test build
         writeBasic()
         buildFile.appendText("""
-            println(changelog.data())
+            println(changelog.data)
         """.trimIndent())
 
         // Run the build
