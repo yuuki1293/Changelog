@@ -8,6 +8,8 @@ data class Changelog(
     val versionRegex: Regex = DEFAULT_VERSION_REGEX,
     val versionIndex: Int = DEFAULT_VERSION_INDEX,
     val dateIndex: Int = DEFAULT_DATE_INDEX,
+    val pattern: String = DEFAULT_PATTERN,
+
 ) {
     companion object {
         /**
@@ -24,6 +26,11 @@ data class Changelog(
          * The default date index
          */
         const val DEFAULT_DATE_INDEX = 3
+
+        /**
+         * The default pattern used by date parser
+         */
+        const val DEFAULT_PATTERN = "yyyy-MM-dd"
 
         /**
          * Empty instance.
@@ -81,7 +88,7 @@ data class Changelog(
 
         val dateStr = groups.getOrNull(dateIndex) ?: return Pair(versionStr, null)
         val date = try {
-            LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+            LocalDate.parse(dateStr, DateTimeFormatter.ofPattern(pattern))
         } catch (e: Exception) {
             null // 日付が無効な場合はnull
         }
