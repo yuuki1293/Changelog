@@ -39,7 +39,7 @@ gradlePlugin {
     val changelog by plugins.creating {
         id = "io.github.yuuki1293.changelog"
         displayName = "Changelog"
-        description = "gradle plugin for processing changelog"
+        description = "Gradle plugin for read changelog. Retrieve specific version text and dates from Changelog."
         tags = listOf("changelog")
         implementationClass = "com.github.yuuki1293.changelog.ChangelogPlugin"
     }
