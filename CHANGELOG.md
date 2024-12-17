@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 - `latest` get latest data
 - `data` get target data
 - `specific(String)` get data
+- `has(String)` check specific version available
 - `get(Int)` get data by index
 - `getOrNull(Int)` get data by index, return null if not found
 - `row` get target row

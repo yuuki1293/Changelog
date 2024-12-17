@@ -132,6 +132,18 @@ open class ChangelogExtension(project: Project) {
     }
 
     /**
+     * Check specific version available
+     */
+    fun has(version: String): Boolean {
+        val target = changelog.getData().filter { it.version == version }
+        return when (target.size) {
+            0 -> false
+            1 -> true
+            else -> true
+        }
+    }
+
+    /**
      * Returns the data at the specified index.
      */
     fun get(index: Int): Changelog.Data {
