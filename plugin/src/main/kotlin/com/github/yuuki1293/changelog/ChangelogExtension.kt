@@ -39,7 +39,8 @@ open class ChangelogExtension(project: Project) {
      *  }
      *  ```
      */
-    val versionRegex: Property<Regex> = project.objects.property(Regex::class.java).convention(Changelog.DEFAULT_VERSION_REGEX)
+    val versionRegex: Property<Regex> =
+        project.objects.property(Regex::class.java).convention(Changelog.DEFAULT_VERSION_REGEX)
 
     /**
      * Which occurrence of version matches the regular expression? default: 1
@@ -50,7 +51,8 @@ open class ChangelogExtension(project: Project) {
      * - 2: ` - 2019-02-15`
      * - 3: `2019-02-15`
      */
-    val versionIndex: Property<Int> = project.objects.property(Int::class.java).convention(Changelog.DEFAULT_VERSION_INDEX)
+    val versionIndex: Property<Int> =
+        project.objects.property(Int::class.java).convention(Changelog.DEFAULT_VERSION_INDEX)
 
     /**
      * Which occurrence of date matches the regular expression? default: 3
@@ -82,7 +84,15 @@ open class ChangelogExtension(project: Project) {
         private const val DEFAULT_FILE_NAME: String = "CHANGELOG.md"
     }
 
-    private val changelog: Changelog = Changelog(allText, versionRegex.get(), versionIndex.get(), dateIndex.get(), pattern.get())
+    private val changelog by lazy {
+        Changelog(
+            allText,
+            versionRegex.get(),
+            versionIndex.get(),
+            dateIndex.get(),
+            pattern.get()
+        )
+    }
 
     /**
      * get all raw text.
@@ -92,27 +102,29 @@ open class ChangelogExtension(project: Project) {
     /**
      * get latest data
      */
-    val latest: Changelog.Data get() {
-        return changelog.getData()[0]
-    }
+    val latest: Changelog.Data
+        get() {
+            return changelog.getData()[0]
+        }
 
     /**
      * get data set by the `version` property.
      *
      * NOTE: If you want to get target data, you can get them directly. use `changelog.text` instead of `changelog.data.text`
      */
-    val data: Changelog.Data get() {
-        return specific(target.get())
-    }
+    val data: Changelog.Data
+        get() {
+            return specific(target.get())
+        }
 
     /**
      * get data.
      */
     fun specific(version: String): Changelog.Data {
-        if(version == "latest") return latest
+        if (version == "latest") return latest
 
         val target = changelog.getData().filter { it.version == version }
-        when(target.size) {
+        when (target.size) {
             0 -> throw GradleException("$version version notfound")
             1 -> return target[0]
             else -> throw GradleException("There is multiple $version version available")
