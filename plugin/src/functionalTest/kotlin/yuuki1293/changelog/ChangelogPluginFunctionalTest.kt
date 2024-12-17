@@ -14,12 +14,12 @@ import org.junit.jupiter.api.io.TempDir
  */
 @Suppress("FunctionName")
 class ChangelogPluginFunctionalTest {
-
     @field:TempDir
     lateinit var projectDir: File
 
     private val buildFile by lazy { projectDir.resolve("build.gradle") }
     private val settingsFile by lazy { projectDir.resolve("settings.gradle") }
+    private val testFile by lazy { projectDir.resolve("CHANGELOG.md") }
 
     @Test fun `can configure minimum changelog`() {
         // Set up the test build
@@ -32,6 +32,7 @@ class ChangelogPluginFunctionalTest {
             changelog {
             }
         """.trimIndent())
+        testFile.writeText(this::class.java.getResource("/SAMPLE_CHANGELOG.md")?.readText() ?: "")
 
         // Run the build
         val runner = GradleRunner.create()

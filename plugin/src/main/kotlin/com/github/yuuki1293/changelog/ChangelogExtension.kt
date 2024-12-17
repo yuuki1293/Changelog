@@ -82,7 +82,7 @@ open class ChangelogExtension(project: Project) {
         private const val DEFAULT_FILE_NAME: String = "CHANGELOG.md"
     }
 
-    private var changelog: Changelog = Changelog.EMPTY
+    private val changelog: Changelog = Changelog(allText, versionRegex.get(), versionIndex.get(), dateIndex.get(), pattern.get())
 
     /**
      * get all raw text.
@@ -93,7 +93,6 @@ open class ChangelogExtension(project: Project) {
      * get latest data
      */
     val latest: Changelog.Data get() {
-        sync()
         return changelog.getData()[0]
     }
 
@@ -112,7 +111,6 @@ open class ChangelogExtension(project: Project) {
     fun specific(version: String): Changelog.Data {
         if(version == "latest") return latest
 
-        sync()
         val target = changelog.getData().filter { it.version == version }
         when(target.size) {
             0 -> throw GradleException("$version version notfound")
@@ -127,13 +125,4 @@ open class ChangelogExtension(project: Project) {
     val text: String get() = data.text
     val header: String get() = data.header
     val body: String get() = data.body
-
-    /**
-     * sync changelog instance.
-     */
-    private fun sync() {
-        if (allText != changelog.rawText) {
-            changelog = Changelog(allText, versionRegex.get(), versionIndex.get(), dateIndex.get(), pattern.get())
-        }
-    }
 }

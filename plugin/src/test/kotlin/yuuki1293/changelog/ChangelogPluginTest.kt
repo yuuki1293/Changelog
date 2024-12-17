@@ -4,6 +4,8 @@
 package yuuki1293.changelog
 
 import org.gradle.testfixtures.ProjectBuilder
+import org.junit.jupiter.api.io.TempDir
+import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertNotNull
 
@@ -14,6 +16,8 @@ class ChangelogPluginTest {
     @Test fun `plugin registers task`() {
         // Create a test project and apply the plugin
         val project = ProjectBuilder.builder().build()
+        val testFile by lazy { project.rootDir.resolve("CHANGELOG.md") }
+        testFile.writeText(this::class.java.getResource("/SAMPLE_CHANGELOG.md")?.readText() ?: "")
         project.plugins.apply("io.github.yuuki1293.changelog")
 
         // Verify the result
