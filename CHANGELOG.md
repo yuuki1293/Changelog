@@ -2,9 +2,18 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
-## [Unreleased]
+## [1.0.0] - 2024-12-17
 - first release!
 ### Add
-- `text()` get all raw text
-- `latest()` get latest data
-- `data()` get target data
+- `allText` get all raw text
+- `latest` get latest data
+- `data` get target data
+- `specific(String)` get data
+- `get(Int)` get data by index
+- `getOrNull(Int)` get data by index, return null if not found
+- `row` get target row
+- `version` get target version
+- `date` get target date
+- `text` get target text
+- `header` get target header
+- `body` get target body
