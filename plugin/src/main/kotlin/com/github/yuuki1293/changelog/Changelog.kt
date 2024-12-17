@@ -99,7 +99,7 @@ data class Changelog(
     fun isEmpty(): Boolean = rawText.isEmpty()
 
     data class Data(
-        val index: Int,
+        val row: Int,
         val version: String,
         val date: LocalDate?,
         val text: String,

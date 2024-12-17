@@ -119,7 +119,7 @@ open class ChangelogExtension(project: Project) {
         }
     }
 
-    val index: Int get() = data.index
+    val row: Int get() = data.row
     val version: String get() = data.version
     val date: LocalDate? get() = data.date
     val text: String get() = data.text
