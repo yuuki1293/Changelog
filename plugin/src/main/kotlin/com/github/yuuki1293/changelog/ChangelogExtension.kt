@@ -95,12 +95,12 @@ open class ChangelogExtension(project: Project) {
     }
 
     /**
-     * get all raw text.
+     * Get all raw text.
      */
     val allText: String get() = file.get().asFile.readText()
 
     /**
-     * get latest data
+     * Get latest data
      */
     val latest: Changelog.Data
         get() {
@@ -108,7 +108,7 @@ open class ChangelogExtension(project: Project) {
         }
 
     /**
-     * get data set by the `version` property.
+     * Get data set by the `version` property.
      *
      * NOTE: If you want to get target data, you can get them directly. use `changelog.text` instead of `changelog.data.text`
      */
@@ -118,7 +118,7 @@ open class ChangelogExtension(project: Project) {
         }
 
     /**
-     * get data.
+     * Get data.
      */
     fun specific(version: String): Changelog.Data {
         if (version == "latest") return latest
@@ -129,6 +129,20 @@ open class ChangelogExtension(project: Project) {
             1 -> return target[0]
             else -> throw GradleException("There is multiple $version version available")
         }
+    }
+
+    /**
+     * Returns the data at the specified index.
+     */
+    fun get(index: Int): Changelog.Data {
+        return changelog.getData()[index]
+    }
+
+    /**
+     * Returns an data at the given [index] or `null` if the [index] is out of bounds of this list.
+     */
+    fun getOrNull(index: Int): Changelog.Data? {
+        return changelog.getData().getOrNull(index)
     }
 
     val row: Int get() = data.row
