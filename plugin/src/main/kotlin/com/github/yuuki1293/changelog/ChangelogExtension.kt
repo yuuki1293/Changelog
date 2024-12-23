@@ -157,6 +157,13 @@ open class ChangelogExtension(project: Project) {
         return changelog.getData().getOrNull(index)
     }
 
+    /**
+     * Check if the latest is `Unreleased`.
+     */
+    fun hasUnreleased(): Boolean {
+        return version == "Unreleased"
+    }
+
     val row: Int get() = data.row
     val version: String get() = data.version
     val date: LocalDate? get() = data.date
