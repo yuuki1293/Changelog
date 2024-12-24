@@ -30,7 +30,7 @@ dependencies {
 }
 
 group = "io.github.yuuki1293"
-version = "1.0.0"
+version = "1.1.0"
 
 gradlePlugin {
     website = "https://github.com/yuuki1293/Changelog"
