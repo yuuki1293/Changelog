@@ -30,7 +30,12 @@ dependencies {
 }
 
 group = "io.github.yuuki1293"
-version = "1.1.0"
+version = "1.1.1"
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
 
 gradlePlugin {
     website = "https://github.com/yuuki1293/Changelog"
