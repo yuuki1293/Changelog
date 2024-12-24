@@ -33,8 +33,8 @@ group = "io.github.yuuki1293"
 version = "1.1.1"
 
 java {
-    withSourcesJar()
     withJavadocJar()
+    withSourcesJar()
 }
 
 gradlePlugin {
@@ -47,6 +47,12 @@ gradlePlugin {
         description = "Gradle plugin for read changelog. Retrieve specific version text and dates from Changelog."
         tags = listOf("changelog")
         implementationClass = "com.github.yuuki1293.changelog.ChangelogPlugin"
+    }
+}
+
+tasks.javadoc {
+    if (JavaVersion.current().isJava9Compatible) {
+        (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
 }
 
