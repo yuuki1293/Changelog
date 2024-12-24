@@ -5,10 +5,10 @@ gradle plugin for read changelog. Retrieve specific version text and dates from 
 ```groovy
 plugins {
     // build.gradle
-    id 'com.github.yuuki1293.changelog' version '1.0.0'
+    id 'io.github.yuuki1293.changelog' version '1.0.0'
 
     // build.gradle.kts
-    id("com.github.yuuki1293.changelog") version("1.0.0")
+    id("io.github.yuuki1293.changelog") version ("1.1.0")
 }
 
 // configuration (Optional)
